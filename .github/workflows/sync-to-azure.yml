@@ -1,10 +1,8 @@
-
-
 name: Sync GitHub to Azure DevOps
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ]   # bruk "main" hvis branchen din heter main
 
 jobs:
   mirror:
@@ -22,5 +20,4 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
-          git remote add azure https://aboawskenan:${AZURE_PAT}@dev.azure.com/aboawskenan/webApi/_git/webApi
-          git push azure master --force
+          git push https://aboawskenan:${AZURE_PAT}@dev.azure.com/aboawskenan/webApi/_git/webApi master --force
