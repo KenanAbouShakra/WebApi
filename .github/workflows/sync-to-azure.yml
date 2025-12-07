@@ -1,2 +1,26 @@
 
 
+name: Sync GitHub to Azure DevOps
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to Azure DevOps
+        env:
+          AZURE_PAT: ${{ secrets.AZURE_PAT }}
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git remote add azure https://aboawskenan:${AZURE_PAT}@dev.azure.com/aboawskenan/webApi/_git/webApi
+          git push azure master --force
