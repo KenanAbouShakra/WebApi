@@ -20,4 +20,5 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "GitHub Actions"
-          git push https://aboawskenan:${AZURE_PAT}@dev.azure.com/aboawskenan/webApi/_git/webApi master --force
+          git remote add azure "https://aboawskenan:${AZURE_PAT}@dev.azure.com/aboawskenan/webApi/_git/webApi"
+          git push azure master --force
